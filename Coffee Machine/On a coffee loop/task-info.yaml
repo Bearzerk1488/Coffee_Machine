@@ -271,6 +271,104 @@ files:
         }
     }
   learner_created: false
+- name: src/machine/CoffeeMachine.java
+  visible: true
+  text: |
+    package machine;
+
+    import java.util.Scanner;
+
+    public class CoffeeMachine {
+        final static Scanner scanner = new Scanner(System.in);
+        public static int money = 550;
+        public static int water = 400;
+        public static int milk = 540;
+        public static int beans = 120;
+        public static int cups = 9;
+
+        public static void main(String[] args) {
+            showReport();
+            askForAction();
+        }
+
+        public static void showReport() {
+            System.out.println("\nThe coffee machine has:\n" +
+                    water + " of water\n" +
+                    milk + " of milk\n" +
+                    beans + " of coffee beans\n" +
+                    cups + " of disposable cups\n" +
+                    money + " of money\n");
+        }
+
+        private static void askForAction() {
+            System.out.println("Write action (buy, fill, take): ");
+            String action = scanner.nextLine().trim().toLowerCase();
+            switch (action) {
+                case "buy":
+                    buy();
+                    break;
+                case "fill":
+                    fill();
+                    break;
+                case "take":
+                    take();
+                    break;
+                default:
+                    System.out.println("No such action!");
+            }
+        }
+
+        private static void buy() {
+            System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino: ");
+            int coffee = scanner.nextInt();
+            switch (coffee) {
+                case 1:
+                    water -= 250;
+                    beans -= 16;
+                    cups -= 1;
+                    money += 4;
+                    showReport();
+                    break;
+                case 2:
+                    water -= 350;
+                    milk -= 75;
+                    beans -= 20;
+                    cups -= 1;
+                    money += 7;
+                    showReport();
+                    break;
+                case 3:
+                    water -= 200;
+                    milk -= 100;
+                    beans -= 12;
+                    cups -= 1;
+                    money += 6;
+                    showReport();
+                    break;
+                default:
+                    System.out.println("No such coffee!");
+            }
+        }
+
+        private static void fill() {
+            System.out.println("Write how many ml of water do you want to add: ");
+            water += scanner.nextInt();
+            System.out.println("Write how many ml of milk do you want to add: ");
+            milk += scanner.nextInt();
+            System.out.println("Write how many grams of coffee beans do you want to add: ");
+            beans += scanner.nextInt();
+            System.out.println("Write how many disposable cups of coffee do you want to add: ");
+            cups += scanner.nextInt();
+            showReport();
+        }
+
+        private static void take() {
+            System.out.println("I gave you $" + money);
+            money -= money;
+            showReport();
+        }
+    }
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/33/stages/179/implement
-status: Unchecked
+status: Solved
 record: -1
